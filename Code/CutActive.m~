@@ -1,0 +1,31 @@
+function [ ma ] = CutActive( m )
+%CUTACTIVE returns only trials containing the data, during which the rat
+%was running. Input and output are both arrays of trials.
+
+
+for p=1:length(m)
+if strcmp(m.ID.day,'P55')
+
+    display('Data made on day 55 is compromised');
+    display('Please, do not use it, if it necessitates the correct moments of the events');
+    ma=m;
+    
+else
+    
+    for i=1:length(m.vicon.events.ge.start)
+        m.ID
+        if (m.vicon.events.ge.start(i)<m.TDT.TimeCentered(1))
+            if m.vicon.events.ge.stop(i)>m.TDT.TimeCentered(end)
+                ma(i)=m;
+            else
+                ma(i)=Cut(m,m.TDT.TimeCentered(1),m.vicon.events.ge.stop(i));
+            end
+        elseif (m.vicon.events.ge.stop(i)>m.TDT.TimeCentered(end))
+            ma(i)=Cut(m,m.vicon.events.ge.start(i),m.TDT.TimeCentered(end));
+        else
+            ma(i)=Cut(m,m.vicon.events.ge.start(i),m.vicon.events.ge.stop(i));
+        end
+    end
+end
+end
+

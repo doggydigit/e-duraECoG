@@ -1,0 +1,41 @@
+structure Trial:
+
+	structure ID:
+		string mouseID
+		string day
+		string track
+		string trialID
+
+	structure TDT:
+		double TriggerLength
+		double frequency
+		double t0
+		array trigger
+		array TimeCentered
+		matrix 9xN Electrode
+		array good
+		
+	structure vicon:
+		double TriggerLength
+		double frequency
+		double t0
+		array TimeCentered
+		array Trig
+		array S1
+		array RMG
+		array RTA
+		array RVL
+		array RST
+		structure events:
+			structure lf:
+				array start
+				array stop
+				array fail
+			structure rf:
+				array start
+				array stop
+				array fail				
+			structure ge:
+				array start
+				array stop
+				array fail
